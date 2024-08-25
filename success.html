@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f3f3;
+            font-family: Arial, sans-serif;
+        }
+
+        .success-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #28a745;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            animation: pop-up 0.5s ease-in-out;
+        }
+
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            fill: #fff;
+        }
+
+        .success-message {
+            font-size: 18px;
+            color: #333;
+            animation: fade-in 1.5s ease-in-out;
+        }
+
+        @keyframes pop-up {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M16 8a8 8 0 1 1-16 0 8 8 0 0 1 16 0zm-9.03 3.97a.75.75 0 0 0 1.06 0l5.25-5.25a.75.75 0 1 0-1.06-1.06L7.5 10.44 4.78 7.72a.75.75 0 1 0-1.06 1.06l3.25 3.25z"/>
+            </svg>
+        </div>
+        <div class="success-message">Success, Your Game Balance will be doubled within 10 minutes</div>
+    </div>
+</body>
+</html>
